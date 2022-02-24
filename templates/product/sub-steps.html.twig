@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product Details</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="accordion" id="accordionExample">
+        {% for key,inspection in inspections %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ inspection.identifier }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse{{ inspection.identifier }}" aria-expanded="true"
+                            aria-controls="collapse{{ inspection.identifier }}">
+                        {{ inspection.heading }}
+                    </button>
+                </h2>
+                <div id="collapse{{ inspection.identifier }}" class="accordion-collapse collapse {% if key == 0 %} show {% endif %}"
+                     aria-labelledby="heading{{ inspection.identifier }}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {% for subtest in inspection.Substeps %}
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="subtests[]" {% if subtest.hasProduct(product) %} checked {% endif%} value="{{ subtest.id }}">
+                                    {{ subtest.name }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <button class="float-end btn btn-sm btn-light mx-2 my-2">{{ button_label|default('Save') }}</button>
+    <a class="float-end btn btn-sm btn-light mx-2 my-2" href="{{ path('product_index') }}">Cancel</a>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

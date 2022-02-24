@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SubStep{% endblock %}
+
+{% block body %}
+    <h1>Edit SubStep</h1>
+
+    {{ include('sub_step/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('sub_step_index') }}">back to list</a>
+
+    {{ include('sub_step/_delete_form.html.twig') }}
+{% endblock %}

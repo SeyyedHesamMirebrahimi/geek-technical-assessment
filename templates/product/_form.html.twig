@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<button  class="float-end btn btn-sm btn-light mx-2 my-2">{{ button_label|default('Save') }}</button>
+<a  class="float-end btn btn-sm btn-light mx-2 my-2" href="{{ path('product_index') }}">Cancel</a>
+{{ form_end(form) }}

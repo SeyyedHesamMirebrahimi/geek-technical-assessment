@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SubStep{% endblock %}
+
+{% block body %}
+    <h1>SubStep</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ sub_step.createdAt ? sub_step.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ sub_step.updatedAt ? sub_step.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DeletedAt</th>
+                <td>{{ sub_step.deletedAt ? sub_step.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Identifier</th>
+                <td>{{ sub_step.identifier }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ sub_step.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ sub_step.name }}</td>
+            </tr>
+            <tr>
+                <th>Column3</th>
+                <td>{{ sub_step.column3 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('sub_step_index') }}">back to list</a>
+
+    <a href="{{ path('sub_step_edit', {'id': sub_step.id}) }}">edit</a>
+
+    {{ include('sub_step/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h1>Product</h1>
+        </div>
+        <div class="col">
+            <a  class="float-end btn btn-sm btn-success" href="{{ path('product_new') }}">New Product</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>CreatedAt</th>
+                <th>Assign Inspection Steps</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td><a class="btn btn-sm btn-light" href="{{ path('product_assign_steps', {'id': product.id}) }}">Assign Product Steps</a></td>
+                <td><a class="btn btn-sm btn-primary" href="{{ path('product_edit', {'id': product.id}) }}">edit</a></td>
+                <td><form method="post" action="{{ path('product_delete', {'id': product.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
